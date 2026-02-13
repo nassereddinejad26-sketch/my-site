@@ -154,12 +154,18 @@
       z-index: 5;
       padding-top: 12px;
     }
+    .no-select-bg {
+      user-select: none;
+      webkit-user-select: none;
+      moz-user-select: none;
+      ms-user-select: none;
+    }
   </style>
 </head>
 <body>
 
 <main class="wrap">
-  <section class="card">
+  <section class="card no-select-bg">
     <div class="grid">
 
       <div>
@@ -234,5 +240,6 @@
 
 </body>
 </html>
+
 
 
