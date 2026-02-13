@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luxury Valentine Card</title>
+  <meta name="description" content="An elegant Valentine page with soft animations and a teddy 🧸">
+  <style>
+    :root{
+      --bg-1:#0b0b10;
+      --bg-2:#1a0f15;
+      --ink:#f5f7fb;
+      --muted:#c9c9cf;
+      --accent:#ff4d6d;
+      --accent-2:#d6336c;
+      --gold:#f5c16c;
+      --glass: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.18);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    html,body{
+      height:100%;
+      background:
+        radial-gradient(1100px 700px at 15% 20%, rgba(255,77,109,.08), transparent 40%),
+        radial-gradient(900px 600px at 85% 70%, rgba(245,193,108,.08), transparent 45%),
+        linear-gradient(120deg, var(--bg-1), var(--bg-2) 45%, var(--bg-1));
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background: radial-gradient(60% 60% at 50% 50%, transparent 60%, rgba(0,0,0,.35));
+      pointer-events:none;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding: clamp(16px, 3vw, 32px);
+    }
+
+    .card{
+      width:min(100%, 980px);
+      background:var(--glass);
+      border:1px solid var(--stroke);
+      border-radius:28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding:clamp(18px, 2.5vw, 28px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap: 28px;
+      align-items:center;
+    }
+
+    @media (max-width:900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(30px, 4.5vw, 56px);
+      background: linear-gradient(90deg, #fff, #ffe8d1, #ffb3c1, #fff);
+      -moz-background-clip:text;
+      color:transparent;
+    }
+
+    .tagline{
+      color:var(--muted);
+      font-size:18px;
+      margin-top:12px;
+    }
+
+    .actions{
+      margin-top:20px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      cursor:pointer;
+      border:0;
+      padding:12px 18px;
+      font-weight:700;
+      border-radius:14px;
+      background: linear-gradient(180deg, #ffe7b1, #f5c16c);
+      color:#201a17;
+    }
+
+    .btn-ghost{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.2);
+      padding:12px 16px;
+      font-weight:700;
+      border-radius:14px;
+      color:#ffe3ea;
+      background: rgba(255,255,255,.04);
+    }
+
+    .secret{
+      margin-top:18px;
+      display:none;
+      color:#ffe8f0;
+    }
+
+    .secret.show{
+      display:block;
+      animation: fadeIn .5s ease;
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(6px) }
+      to{ opacity:1; transform:translateY(0) }
+    }
+
+    .teddy{
+      width:220px;
+      height:220px;
+      border-radius:28px;
+      display:grid;
+      place-items:center;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      font-size:110px;
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    @keyframes floaty{
+      0%,100%{ transform:translateY(0) }
+      50%{ transform:translateY(-8px) }
+    }
+
+    footer{
+      margin-top:20px;
+      font-size:13px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+    }
+  </style>
+</head>
+<body>
+
+<main class="wrap">
+  <section class="card">
+    <div class="grid">
+
+      <div>
+        <h1>Happy Valentine’s Day 🧸❤️</h1>
+        <p class="tagline">
+          A touch of luxury and soft love — because the little details mean everything ✨
+        </p>
+
+        <div class="actions">
+          <button class="btn" id="surpriseBtn">Open the surprise</button>
+          <button class="btn-ghost" id="rainBtn">Soft hearts rain</button>
+        </div>
+
+        <div class="secret" id="secret">💌 <strong>From me to you:</strong><br>
+          Your presence alone colors my world.  
+          I love you today, tomorrow, and always.
+        </div>
+      </div>
+
+      <div style="display:grid;place-items:center;">
+        <div class="teddy">🧸</div>
+      </div>
+
+    </div>
+
+    <footer>
+      <span>Made with soft details & love.</span>
+      <span>From my heart to yours 💖</span>
+    </footer>
+
+  </section>
+</main>
+
+<script>
+  const btn = document.getElementById("surpriseBtn");
+  const secret = document.getElementById("secret");
+  const rainBtn = document.getElementById( "rainBtn" );
+
+  btn.addEventListener("click", () => {
+    secret.classList.add("show");
+    btn.disabled = true;
+  });
+  rainBtn.addEventListener("click", () => {
+    for (let i = 0; i < 20; i++ ) {
+      const heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-20px";
+      heart.style.fontSize = "20px";
+      heart.style.animation = "floatUp 4s ease forwards";
+      document.body.appendChild(heart);
+      setTimeout (() => heart.remove(), 4000);
+    }
+  } )
+</script>
+<style>
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-110vh);
+      opacity: 0;
+    }
+  }
+</style>
+
+</body>
+</html>
